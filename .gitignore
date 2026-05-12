@@ -1,0 +1,12 @@
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+env/
+
+# Frontend (jika pakai npm kedepannya)
+node_modules/

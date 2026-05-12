@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Photoshop - PCD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Setup warna custom sesuai tema Figma lu
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'p-dark': '#1e1e1e',     // Background utama
+                        'p-panel': '#2d2d2d',    // Warna navbar & sidebar
+                        'p-canvas': '#737373',   // Warna abu-abu area gambar
+                        'p-blue': '#2563eb'      // Warna tombol biru
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-p-dark text-white h-screen flex flex-col font-sans overflow-hidden">
+
+    <nav class="bg-p-panel h-14 flex items-center justify-between px-6 shrink-0 shadow-md relative z-50">
+        <div class="flex items-center gap-10">
+            <div class="font-bold tracking-widest text-lg">POSHOP</div>
+            
+            <div class="flex gap-6 text-sm uppercase tracking-wider">
+                
+                <div class="relative group cursor-pointer h-14 flex items-center">
+                    <span class="hover:text-gray-300">File</span>
+                    <div class="absolute hidden group-hover:block top-14 left-0 w-48 bg-p-panel shadow-lg border border-gray-600 py-2 z-50">
+                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">open image</div>
+                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">save image as</div>
+                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">reset</div>
+                    </div>
+                </div>
+
+                <div class="relative group cursor-pointer h-14 flex items-center">
+                    <span class="hover:text-gray-300">Edit</span>
+                    <div class="absolute hidden group-hover:block top-14 left-0 w-48 bg-p-panel shadow-lg border border-gray-600 py-2 z-50">
+                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">undo</div>
+                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">redo</div>
+                    </div>
+                </div>
+
+                <div class="relative group cursor-pointer h-14 flex items-center">
+                    <span class="hover:text-gray-300">Filter</span>
+                    <div class="absolute hidden group-hover:block top-14 left-0 w-56 bg-p-panel shadow-lg border border-gray-600 py-2 z-50">
+                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">smoothing (blur)</div>
+                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">gaussian blur</div>
+                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">median filter</div>
+                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">sharpening</div>
+                        <hr class="border-gray-500 my-1">
+                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">noise removal</div>
+                        <hr class="border-gray-500 my-1">
+                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">thresholding</div>
+                        <div class="px-4 py-2 hover:bg-gray-600 flex justify-between lowercase">edge detection <span></span></div>
+                        <div class="px-4 py-2 hover:bg-gray-600 flex justify-between lowercase">morphology <span></span></div>
+                    </div>
+                </div>
+
+                <div class="relative group cursor-pointer h-14 flex items-center">
+                    <span class="hover:text-gray-300">Transform</span>
+                    <div class="absolute hidden group-hover:block top-14 left-0 w-48 bg-p-panel shadow-lg border border-gray-600 py-2 z-50">
+                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">rotate</div>
+                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">flip horizontal</div>
+                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">flip vertical</div>
+                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">crop</div>
+                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">resize</div>
+                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">translation</div>
+                        <hr class="border-gray-500 my-1">
+                        <div class="px-4 py-2 hover:bg-gray-600 flex justify-between lowercase">interpolation <span>></span></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="flex gap-4">
+            <button class="bg-p-blue hover:bg-blue-500 text-white px-6 py-1.5 rounded-full text-xs font-semibold tracking-wide">RESET</button>
+            <button class="bg-p-blue hover:bg-blue-500 text-white px-6 py-1.5 rounded-full text-xs font-semibold tracking-wide">EXPORT</button>
+        </div>
+    </nav>
+
+    <div class="flex flex-1 overflow-hidden">
+        
+        <div class="flex-1 flex flex-col p-2 gap-2">
+            
+            <div class="flex-1 flex gap-2">
+                <div class="flex-1 bg-p-canvas border border-gray-800 flex items-center justify-center relative">
+                    <span class="text-gray-900 font-medium text-sm">original image</span>
+                </div>
+                <div class="flex-1 bg-p-canvas border border-gray-800 flex items-center justify-center relative">
+                    <span class="text-gray-900 font-medium text-sm">edited image</span>
+                </div>
+            </div>
+
+            <div class="h-64 flex gap-2 shrink-0">
+                <div class="flex-1 bg-[#cfcfcf] border border-gray-800 flex items-center justify-center">
+                    <span class="text-gray-800 text-xs">histogram original image</span>
+                </div>
+                <div class="flex-1 bg-[#cfcfcf] border border-gray-800 flex items-center justify-center">
+                    <span class="text-gray-800 text-xs">histogram edited image</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="w-80 bg-p-panel shrink-0 border-l border-gray-800 flex flex-col p-6 overflow-y-auto">
+            <div class="flex flex-col gap-6 text-sm uppercase tracking-wider text-gray-300">
+                <div class="cursor-pointer hover:text-white">Image Enhancement</div>
+                <div class="cursor-pointer hover:text-white">Geometric Transformation</div>
+                <div class="cursor-pointer hover:text-white">Binary & Edge Processing</div>
+                <div class="cursor-pointer hover:text-white">Color Processing</div>
+                <div class="cursor-pointer hover:text-white">Image Segmentation</div>
+                <div class="cursor-pointer hover:text-white">Image Compression</div>
+            </div>
+            
+            </div>
+
+    </div>
+
+</body>
+</html>
