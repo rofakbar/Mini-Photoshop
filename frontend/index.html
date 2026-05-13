@@ -5,121 +5,183 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini Photoshop - PCD</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
-        // Setup warna custom sesuai tema Figma lu
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'], // Font modern
+                    },
                     colors: {
-                        'p-dark': '#1e1e1e',     // Background utama
-                        'p-panel': '#2d2d2d',    // Warna navbar & sidebar
-                        'p-canvas': '#737373',   // Warna abu-abu area gambar
-                        'p-blue': '#2563eb'      // Warna tombol biru
+                        'p-dark': '#1e1e1e',     
+                        'p-panel': '#2d2d2d',    
+                        'p-canvas': '#737373',   
+                        'p-blue': '#2563eb'      
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="bg-p-dark text-white h-screen flex flex-col font-sans overflow-hidden">
+<body class="bg-p-dark text-gray-200 h-screen flex flex-col font-sans overflow-hidden antialiased">
 
-    <nav class="bg-p-panel h-14 flex items-center justify-between px-6 shrink-0 shadow-md relative z-50">
-        <div class="flex items-center gap-10">
-            <div class="font-bold tracking-widest text-lg">POSHOP</div>
+    <nav class="bg-p-panel h-16 flex items-center justify-between px-8 shrink-0 shadow-[0_4px_20px_rgba(0,0,0,0.3)] relative z-50 border-b border-gray-700/50">
+        <div class="flex items-center gap-12">
+            <div class="font-bold tracking-widest text-xl text-white">POSHOP</div>
             
-            <div class="flex gap-6 text-sm uppercase tracking-wider">
+            <div class="flex gap-2 text-sm uppercase tracking-wide font-medium">
                 
-                <div class="relative group cursor-pointer h-14 flex items-center">
-                    <span class="hover:text-gray-300">File</span>
-                    <div class="absolute hidden group-hover:block top-14 left-0 w-48 bg-p-panel shadow-lg border border-gray-600 py-2 z-50">
-                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">open image</div>
-                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">save image as</div>
-                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">reset</div>
+                <div class="relative group cursor-pointer h-16 flex items-center px-4">
+                    <span class="hover:text-white transition-colors">File</span>
+                    <div class="absolute invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out top-16 left-0 w-52 bg-p-panel/95 backdrop-blur-md shadow-2xl border border-gray-600 rounded-b-lg rounded-tr-lg py-2 z-50">
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">open image</div>
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">save image as</div>
+                        <hr class="border-gray-600 my-1 mx-3">
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-red-400 lowercase transition-colors text-red-300">reset</div>
                     </div>
                 </div>
 
-                <div class="relative group cursor-pointer h-14 flex items-center">
-                    <span class="hover:text-gray-300">Edit</span>
-                    <div class="absolute hidden group-hover:block top-14 left-0 w-48 bg-p-panel shadow-lg border border-gray-600 py-2 z-50">
-                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">undo</div>
-                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">redo</div>
+                <div class="relative group cursor-pointer h-16 flex items-center px-4">
+                    <span class="hover:text-white transition-colors">Edit</span>
+                    <div class="absolute invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out top-16 left-0 w-48 bg-p-panel/95 backdrop-blur-md shadow-2xl border border-gray-600 rounded-b-lg rounded-tr-lg py-2 z-50">
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors flex justify-between">undo <span class="text-xs text-gray-400">Ctrl+Z</span></div>
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors flex justify-between">redo <span class="text-xs text-gray-400">Ctrl+Y</span></div>
                     </div>
                 </div>
 
-                <div class="relative group cursor-pointer h-14 flex items-center">
-                    <span class="hover:text-gray-300">Filter</span>
-                    <div class="absolute hidden group-hover:block top-14 left-0 w-56 bg-p-panel shadow-lg border border-gray-600 py-2 z-50">
-                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">smoothing (blur)</div>
-                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">gaussian blur</div>
-                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">median filter</div>
-                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">sharpening</div>
-                        <hr class="border-gray-500 my-1">
-                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">noise removal</div>
-                        <hr class="border-gray-500 my-1">
-                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">thresholding</div>
-                        <div class="px-4 py-2 hover:bg-gray-600 flex justify-between lowercase">edge detection <span></span></div>
-                        <div class="px-4 py-2 hover:bg-gray-600 flex justify-between lowercase">morphology <span></span></div>
+                <div class="relative group cursor-pointer h-16 flex items-center px-4">
+                    <span class="hover:text-white transition-colors">Filter</span>
+                    <div class="absolute invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out top-16 left-0 w-60 bg-p-panel/95 backdrop-blur-md shadow-2xl border border-gray-600 rounded-b-lg rounded-tr-lg py-2 z-50">
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">smoothing (blur)</div>
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">gaussian blur</div>
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">median filter</div>
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">sharpening</div>
+                        <hr class="border-gray-600 my-1 mx-3">
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">noise removal</div>
+                        <hr class="border-gray-600 my-1 mx-3">
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">thresholding</div>
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white flex justify-between lowercase transition-colors group/sub">edge detection <span class="text-gray-400 group-hover/sub:text-white group-hover/sub:translate-x-1 transition-transform"></span></div>
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white flex justify-between lowercase transition-colors group/sub">morphology <span class="text-gray-400 group-hover/sub:text-white group-hover/sub:translate-x-1 transition-transform"></span></div>
                     </div>
                 </div>
 
-                <div class="relative group cursor-pointer h-14 flex items-center">
-                    <span class="hover:text-gray-300">Transform</span>
-                    <div class="absolute hidden group-hover:block top-14 left-0 w-48 bg-p-panel shadow-lg border border-gray-600 py-2 z-50">
-                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">rotate</div>
-                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">flip horizontal</div>
-                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">flip vertical</div>
-                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">crop</div>
-                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">resize</div>
-                        <div class="px-4 py-2 hover:bg-gray-600 lowercase">translation</div>
-                        <hr class="border-gray-500 my-1">
-                        <div class="px-4 py-2 hover:bg-gray-600 flex justify-between lowercase">interpolation <span>></span></div>
+                <div class="relative group cursor-pointer h-16 flex items-center px-4">
+                    <span class="hover:text-white transition-colors">Transform</span>
+                    <div class="absolute invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out top-16 left-0 w-52 bg-p-panel/95 backdrop-blur-md shadow-2xl border border-gray-600 rounded-b-lg rounded-tr-lg py-2 z-50">
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">rotate</div>
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">flip horizontal</div>
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">flip vertical</div>
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">crop</div>
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">resize</div>
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">translation</div>
+                        <hr class="border-gray-600 my-1 mx-3">
+                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white flex justify-between lowercase transition-colors">interpolation <span class="text-gray-400">></span></div>
                     </div>
                 </div>
 
             </div>
         </div>
 
-        <div class="flex gap-4">
-            <button class="bg-p-blue hover:bg-blue-500 text-white px-6 py-1.5 rounded-full text-xs font-semibold tracking-wide">RESET</button>
-            <button class="bg-p-blue hover:bg-blue-500 text-white px-6 py-1.5 rounded-full text-xs font-semibold tracking-wide">EXPORT</button>
+        <div class="flex gap-3">
+            <button class="bg-gray-700 hover:bg-gray-600 border border-gray-600 text-white px-6 py-2 rounded-lg text-xs font-semibold tracking-wide transition-all active:scale-95 shadow-sm">RESET</button>
+            <button class="bg-p-blue hover:bg-blue-500 text-white px-6 py-2 rounded-lg text-xs font-semibold tracking-wide transition-all active:scale-95 shadow-md shadow-blue-900/50">EXPORT</button>
         </div>
     </nav>
 
-    <div class="flex flex-1 overflow-hidden">
+    <div class="flex flex-1 overflow-hidden p-4 gap-4 bg-[#181818]">
         
-        <div class="flex-1 flex flex-col p-2 gap-2">
+        <div class="flex-1 flex flex-col gap-4">
             
-            <div class="flex-1 flex gap-2">
-                <div class="flex-1 bg-p-canvas border border-gray-800 flex items-center justify-center relative">
-                    <span class="text-gray-900 font-medium text-sm">original image</span>
+            <div class="flex-1 flex gap-4">
+                <div class="flex-1 bg-p-canvas border border-gray-700 rounded-2xl flex items-center justify-center relative shadow-[inset_0_4px_20px_rgba(0,0,0,0.3)] overflow-hidden group">
+                    <span class="text-gray-800 font-semibold text-sm bg-white/20 px-4 py-2 rounded-full backdrop-blur-sm group-hover:bg-white/30 transition-colors cursor-default">original image</span>
                 </div>
-                <div class="flex-1 bg-p-canvas border border-gray-800 flex items-center justify-center relative">
-                    <span class="text-gray-900 font-medium text-sm">edited image</span>
+                <div class="flex-1 bg-p-canvas border border-gray-700 rounded-2xl flex items-center justify-center relative shadow-[inset_0_4px_20px_rgba(0,0,0,0.3)] overflow-hidden group">
+                    <span class="text-gray-800 font-semibold text-sm bg-white/20 px-4 py-2 rounded-full backdrop-blur-sm group-hover:bg-white/30 transition-colors cursor-default">edited image</span>
                 </div>
             </div>
 
-            <div class="h-64 flex gap-2 shrink-0">
-                <div class="flex-1 bg-[#cfcfcf] border border-gray-800 flex items-center justify-center">
-                    <span class="text-gray-800 text-xs">histogram original image</span>
+            <div class="h-64 flex gap-4 shrink-0">
+                <div class="flex-1 bg-[#d4d4d4] border border-gray-500 rounded-xl flex items-center justify-center shadow-inner">
+                    <span class="text-gray-600 font-medium text-xs uppercase tracking-widest">histogram original image</span>
                 </div>
-                <div class="flex-1 bg-[#cfcfcf] border border-gray-800 flex items-center justify-center">
-                    <span class="text-gray-800 text-xs">histogram edited image</span>
+                <div class="flex-1 bg-[#d4d4d4] border border-gray-500 rounded-xl flex items-center justify-center shadow-inner">
+                    <span class="text-gray-600 font-medium text-xs uppercase tracking-widest">histogram edited image</span>
                 </div>
             </div>
 
         </div>
 
-        <div class="w-80 bg-p-panel shrink-0 border-l border-gray-800 flex flex-col p-6 overflow-y-auto">
-            <div class="flex flex-col gap-6 text-sm uppercase tracking-wider text-gray-300">
-                <div class="cursor-pointer hover:text-white">Image Enhancement</div>
-                <div class="cursor-pointer hover:text-white">Geometric Transformation</div>
-                <div class="cursor-pointer hover:text-white">Binary & Edge Processing</div>
-                <div class="cursor-pointer hover:text-white">Color Processing</div>
-                <div class="cursor-pointer hover:text-white">Image Segmentation</div>
-                <div class="cursor-pointer hover:text-white">Image Compression</div>
+        <div class="w-80 bg-p-panel rounded-2xl border border-gray-700/50 flex flex-col p-5 overflow-y-auto shadow-xl custom-scrollbar">
+            
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xs text-gray-400 font-bold tracking-widest">PROPERTIES</h3>
+                <span class="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded">Layer 1</span>
             </div>
             
+            <div class="flex flex-col gap-3">
+                
+                <div class="border border-gray-700 rounded-lg bg-[#252525] overflow-hidden">
+                    <button class="w-full flex justify-between items-center px-4 py-3 bg-gray-700/30 hover:bg-gray-700/50 transition-colors text-sm font-semibold text-gray-200">
+                        <span>Image Enhancement</span>
+                        <span class="text-gray-400 text-xs">▼</span>
+                    </button>
+                    
+                    <div class="p-4 flex flex-col gap-5">
+                        
+                        <div>
+                            <div class="flex justify-between text-xs text-gray-400 mb-2 font-medium">
+                                <span>Brightness</span>
+                                <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]">0</span>
+                            </div>
+                            <input type="range" min="-100" max="100" value="0" class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between text-xs text-gray-400 mb-2 font-medium">
+                                <span>Contrast</span>
+                                <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]">0</span>
+                            </div>
+                            <input type="range" min="-100" max="100" value="0" class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-2 mt-1">
+                            <button class="bg-gray-700 hover:bg-gray-600 text-xs text-gray-200 py-2 rounded-md transition-colors shadow-sm font-medium">Hist. Equal</button>
+                            <button class="bg-gray-700 hover:bg-gray-600 text-xs text-gray-200 py-2 rounded-md transition-colors shadow-sm font-medium">Sharpen</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border border-gray-700 rounded-lg bg-[#252525] overflow-hidden">
+                    <button class="w-full flex justify-between items-center px-4 py-3 hover:bg-gray-700/50 transition-colors text-sm font-medium text-gray-400 hover:text-gray-200">
+                        <span>Geometric Transform</span>
+                        <span class="text-gray-500 text-xs">▶</span>
+                    </button>
+                </div>
+
+                <div class="border border-gray-700 rounded-lg bg-[#252525] overflow-hidden">
+                    <button class="w-full flex justify-between items-center px-4 py-3 hover:bg-gray-700/50 transition-colors text-sm font-medium text-gray-400 hover:text-gray-200">
+                        <span>Binary & Edge</span>
+                        <span class="text-gray-500 text-xs">▶</span>
+                    </button>
+                </div>
+
+                <div class="border border-gray-700 rounded-lg bg-[#252525] overflow-hidden">
+                    <button class="w-full flex justify-between items-center px-4 py-3 hover:bg-gray-700/50 transition-colors text-sm font-medium text-gray-400 hover:text-gray-200">
+                        <span>Color Processing</span>
+                        <span class="text-gray-500 text-xs">▶</span>
+                    </button>
+                </div>
+
+                <div class="mt-4">
+                    <button class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-sm font-semibold py-3 rounded-lg shadow-lg shadow-blue-900/30 transition-all active:scale-95 flex justify-center items-center gap-2">
+                        <span>🔍</span> Detect Object (CNN)
+                    </button>
+                </div>
+
             </div>
+        </div>
 
     </div>
 
