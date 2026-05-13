@@ -6,6 +6,7 @@
     <title>Mini Photoshop - PCD</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="">
     <script>
         tailwind.config = {
             theme: {
@@ -117,19 +118,16 @@
             
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-xs text-gray-400 font-bold tracking-widest">PROPERTIES</h3>
-                <span class="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded">Layer 1</span>
             </div>
             
             <div class="flex flex-col gap-3">
                 
                 <div class="border border-gray-700 rounded-lg bg-[#252525] overflow-hidden">
-                    <button class="w-full flex justify-between items-center px-4 py-3 bg-gray-700/30 hover:bg-gray-700/50 transition-colors text-sm font-semibold text-gray-200">
+                    <button class="accordion-btn w-full flex justify-between items-center px-4 py-3 hover:bg-gray-700/50 transition-colors text-sm font-medium text-gray-400 hover:text-gray-200">
                         <span>Image Enhancement</span>
-                        <span class="text-gray-400 text-xs">▼</span>
+                        <span class="accordion-icon text-gray-500 text-xs">▶</span>
                     </button>
-                    
-                    <div class="p-4 flex flex-col gap-5">
-                        
+                    <div class="accordion-content hidden p-4 flex flex-col gap-5 border-t border-gray-700/50">
                         <div>
                             <div class="flex justify-between text-xs text-gray-400 mb-2 font-medium">
                                 <span>Brightness</span>
@@ -137,7 +135,6 @@
                             </div>
                             <input type="range" min="-100" max="100" value="0" class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
                         </div>
-
                         <div>
                             <div class="flex justify-between text-xs text-gray-400 mb-2 font-medium">
                                 <span>Contrast</span>
@@ -145,7 +142,6 @@
                             </div>
                             <input type="range" min="-100" max="100" value="0" class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
                         </div>
-
                         <div class="grid grid-cols-2 gap-2 mt-1">
                             <button class="bg-gray-700 hover:bg-gray-600 text-xs text-gray-200 py-2 rounded-md transition-colors shadow-sm font-medium">Hist. Equal</button>
                             <button class="bg-gray-700 hover:bg-gray-600 text-xs text-gray-200 py-2 rounded-md transition-colors shadow-sm font-medium">Sharpen</button>
@@ -154,24 +150,104 @@
                 </div>
 
                 <div class="border border-gray-700 rounded-lg bg-[#252525] overflow-hidden">
-                    <button class="w-full flex justify-between items-center px-4 py-3 hover:bg-gray-700/50 transition-colors text-sm font-medium text-gray-400 hover:text-gray-200">
+                    <button class="accordion-btn w-full flex justify-between items-center px-4 py-3 hover:bg-gray-700/50 transition-colors text-sm font-medium text-gray-400 hover:text-gray-200">
                         <span>Geometric Transform</span>
-                        <span class="text-gray-500 text-xs">▶</span>
+                        <span class="accordion-icon text-gray-500 text-xs">▶</span>
                     </button>
+                    <div class="accordion-content hidden p-4 flex flex-col gap-3 border-t border-gray-700/50">
+                        <button class="bg-gray-700 hover:bg-gray-600 text-xs text-gray-200 py-2 rounded-md transition-colors w-full">Rotate 90°</button>
+                        <button class="bg-gray-700 hover:bg-gray-600 text-xs text-gray-200 py-2 rounded-md transition-colors w-full">Flip Horizontal</button>
+                    </div>
                 </div>
 
                 <div class="border border-gray-700 rounded-lg bg-[#252525] overflow-hidden">
-                    <button class="w-full flex justify-between items-center px-4 py-3 hover:bg-gray-700/50 transition-colors text-sm font-medium text-gray-400 hover:text-gray-200">
+                    <button class="accordion-btn w-full flex justify-between items-center px-4 py-3 hover:bg-gray-700/50 transition-colors text-sm font-medium text-gray-400 hover:text-gray-200">
                         <span>Binary & Edge</span>
-                        <span class="text-gray-500 text-xs">▶</span>
+                        <span class="accordion-icon text-gray-500 text-xs">▶</span>
                     </button>
+                    <div class="accordion-content hidden p-4 flex flex-col gap-4 border-t border-gray-700/50">
+                        
+                        <div>
+                            <div class="flex justify-between text-xs text-gray-400 mb-2 font-medium">
+                                <span>Thresholding (Binary)</span>
+                                <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]">127</span>
+                            </div>
+                            <input type="range" min="0" max="255" value="127" class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                        </div>
+
+                        <hr class="border-gray-600/50">
+
+                        <div>
+                            <label class="text-xs text-gray-400 mb-2 font-medium block">Edge Detection</label>
+                            <div class="flex gap-2">
+                                <select class="flex-1 bg-gray-700 text-xs text-gray-200 py-1.5 px-2 rounded border border-gray-600 outline-none focus:border-p-blue">
+                                    <option value="canny">Canny</option>
+                                    <option value="sobel">Sobel</option>
+                                    <option value="prewitt">Prewitt</option>
+                                    <option value="robert">Robert</option>
+                                    <option value="laplacian">Laplacian</option>
+                                    <option value="log">Laplacian of Gaussian</option>
+                                </select>
+                                <button class="bg-p-blue hover:bg-blue-500 text-white text-xs px-3 rounded transition-colors shadow-sm">Apply</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-xs text-gray-400 mb-2 font-medium block">Morphology</label>
+                            <div class="flex gap-2">
+                                <select class="flex-1 bg-gray-700 text-xs text-gray-200 py-1.5 px-2 rounded border border-gray-600 outline-none focus:border-p-blue">
+                                    <option value="erosion">Erosion</option>
+                                    <option value="dilation">Dilation</option>
+                                </select>
+                                <button class="bg-p-blue hover:bg-blue-500 text-white text-xs px-3 rounded transition-colors shadow-sm">Apply</button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
 
                 <div class="border border-gray-700 rounded-lg bg-[#252525] overflow-hidden">
-                    <button class="w-full flex justify-between items-center px-4 py-3 hover:bg-gray-700/50 transition-colors text-sm font-medium text-gray-400 hover:text-gray-200">
+                    <button class="accordion-btn w-full flex justify-between items-center px-4 py-3 hover:bg-gray-700/50 transition-colors text-sm font-medium text-gray-400 hover:text-gray-200">
                         <span>Color Processing</span>
-                        <span class="text-gray-500 text-xs">▶</span>
+                        <span class="accordion-icon text-gray-500 text-xs">▶</span>
                     </button>
+                    <div class="accordion-content hidden p-4 flex flex-col gap-4 border-t border-gray-700/50">
+                        
+                        <button class="bg-gray-700 hover:bg-gray-600 text-xs text-gray-200 py-2 rounded-md transition-colors w-full font-medium shadow-sm">
+                            Convert to Grayscale
+                        </button>
+
+                        <hr class="border-gray-600/50">
+
+                        <div>
+                            <label class="text-xs text-gray-400 mb-2 font-medium block">Split RGB Channel</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button class="bg-red-900/30 hover:bg-red-800/50 text-red-300 text-xs py-1.5 rounded border border-red-800/50 transition-colors">Red</button>
+                                <button class="bg-green-900/30 hover:bg-green-800/50 text-green-300 text-xs py-1.5 rounded border border-green-800/50 transition-colors">Green</button>
+                                <button class="bg-blue-900/30 hover:bg-blue-800/50 text-blue-300 text-xs py-1.5 rounded border border-blue-800/50 transition-colors">Blue</button>
+                            </div>
+                        </div>
+
+                        <hr class="border-gray-600/50">
+
+                        <div class="flex flex-col gap-3">
+                            <div>
+                                <div class="flex justify-between text-xs text-gray-400 mb-2 font-medium">
+                                    <span>Hue</span>
+                                    <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]">0</span>
+                                </div>
+                                <input type="range" min="-180" max="180" value="0" class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs text-gray-400 mb-2 font-medium">
+                                    <span>Saturation</span>
+                                    <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]">100</span>
+                                </div>
+                                <input type="range" min="0" max="200" value="100" class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
 
                 <div class="mt-4">
@@ -185,5 +261,6 @@
 
     </div>
 
+    <script src="js/ui_logic.js"></script>
 </body>
 </html>
