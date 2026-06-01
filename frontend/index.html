@@ -44,44 +44,6 @@
                     </div>
                 </div>
 
-                <div class="relative group cursor-pointer h-16 flex items-center px-4">
-                    <span class="hover:text-white transition-colors">Edit</span>
-                    <div class="absolute invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out top-16 left-0 w-48 bg-p-panel/95 backdrop-blur-md shadow-2xl border border-gray-600 rounded-b-lg rounded-tr-lg py-2 z-50">
-                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors flex justify-between">undo <span class="text-xs text-gray-400">Ctrl+Z</span></div>
-                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors flex justify-between">redo <span class="text-xs text-gray-400">Ctrl+Y</span></div>
-                    </div>
-                </div>
-
-                <div class="relative group cursor-pointer h-16 flex items-center px-4">
-                    <span class="hover:text-white transition-colors">Filter</span>
-                    <div class="absolute invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out top-16 left-0 w-60 bg-p-panel/95 backdrop-blur-md shadow-2xl border border-gray-600 rounded-b-lg rounded-tr-lg py-2 z-50">
-                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">smoothing (blur)</div>
-                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">gaussian blur</div>
-                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">median filter</div>
-                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">sharpening</div>
-                        <hr class="border-gray-600 my-1 mx-3">
-                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">noise removal</div>
-                        <hr class="border-gray-600 my-1 mx-3">
-                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">thresholding</div>
-                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white flex justify-between lowercase transition-colors group/sub">edge detection <span class="text-gray-400 group-hover/sub:text-white group-hover/sub:translate-x-1 transition-transform"></span></div>
-                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white flex justify-between lowercase transition-colors group/sub">morphology <span class="text-gray-400 group-hover/sub:text-white group-hover/sub:translate-x-1 transition-transform"></span></div>
-                    </div>
-                </div>
-
-                <div class="relative group cursor-pointer h-16 flex items-center px-4">
-                    <span class="hover:text-white transition-colors">Transform</span>
-                    <div class="absolute invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 ease-out top-16 left-0 w-52 bg-p-panel/95 backdrop-blur-md shadow-2xl border border-gray-600 rounded-b-lg rounded-tr-lg py-2 z-50">
-                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">rotate</div>
-                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">flip horizontal</div>
-                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">flip vertical</div>
-                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">crop</div>
-                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">resize</div>
-                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white lowercase transition-colors">translation</div>
-                        <hr class="border-gray-600 my-1 mx-3">
-                        <div class="px-5 py-2.5 hover:bg-gray-600/50 hover:text-white flex justify-between lowercase transition-colors">interpolation <span class="text-gray-400">></span></div>
-                    </div>
-                </div>
-
             </div>
         </div>
 
@@ -116,11 +78,13 @@
             </div>
 
             <div class="h-64 flex gap-4 shrink-0">
-                <div class="flex-1 bg-[#d4d4d4] border border-gray-500 rounded-xl flex items-center justify-center shadow-inner">
-                    <span class="text-gray-600 font-medium text-xs uppercase tracking-widest">histogram original image</span>
+                <div class="flex-1 bg-[#1a1a1a] border border-gray-700 rounded-xl flex items-center justify-center shadow-inner overflow-hidden relative">
+                    <span id="placeholder-hist-orig" class="text-gray-600 font-medium text-xs uppercase tracking-widest">histogram original</span>
+                    <img id="hist-original" src="" class="absolute inset-0 w-full h-full object-contain hidden">
                 </div>
-                <div class="flex-1 bg-[#d4d4d4] border border-gray-500 rounded-xl flex items-center justify-center shadow-inner">
-                    <span class="text-gray-600 font-medium text-xs uppercase tracking-widest">histogram edited image</span>
+                <div class="flex-1 bg-[#1a1a1a] border border-gray-700 rounded-xl flex items-center justify-center shadow-inner overflow-hidden relative">
+                    <span id="placeholder-hist-edit" class="text-gray-600 font-medium text-xs uppercase tracking-widest">histogram edited</span>
+                    <img id="hist-edited" src="" class="absolute inset-0 w-full h-full object-contain hidden">
                 </div>
             </div>
 
@@ -134,65 +98,147 @@
             
             <div class="flex flex-col gap-3">
                 
+                <!-- Image Enhancement -->
                 <div class="border border-gray-700 rounded-lg bg-[#252525] overflow-hidden">
                     <button class="accordion-btn w-full flex justify-between items-center px-4 py-3 hover:bg-gray-700/50 transition-colors text-sm font-medium text-gray-400 hover:text-gray-200">
                         <span>Image Enhancement</span>
                         <span class="accordion-icon text-gray-500 text-xs">▶</span>
                     </button>
-                    <div class="accordion-content hidden p-4 flex flex-col gap-5 border-t border-gray-700/50">
+                    <div class="accordion-content hidden p-4 flex flex-col gap-4 border-t border-gray-700/50">
                         <div>
                             <div class="flex justify-between text-xs text-gray-400 mb-2 font-medium">
                                 <span>Brightness</span>
-                                <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]">0</span>
+                                <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]" id="val-bright">0</span>
                             </div>
-                            <input type="range" min="-100" max="100" value="0" class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                            <input type="range" id="slider-bright" min="-100" max="100" value="0" class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
                         </div>
                         <div>
                             <div class="flex justify-between text-xs text-gray-400 mb-2 font-medium">
                                 <span>Contrast</span>
-                                <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]">0</span>
+                                <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]" id="val-contrast">0</span>
                             </div>
-                            <input type="range" min="-100" max="100" value="0" class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                            <input type="range" id="slider-contrast" min="-100" max="100" value="0" class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
                         </div>
+                        <div>
+                            <div class="flex justify-between text-xs text-gray-400 mb-2 font-medium">
+                                <span>Smoothing (Blur)</span>
+                                <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]" id="val-blur">1</span>
+                            </div>
+                            <input type="range" id="slider-blur" min="1" max="31" step="2" value="1" class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                        </div>
+                        <button id="btn-apply-enhance" class="bg-p-blue hover:bg-blue-500 text-white text-xs px-3 py-1.5 rounded transition-colors shadow-sm w-full font-medium mt-1">Apply Adjustments</button>
                         <div class="grid grid-cols-2 gap-2 mt-1">
-                            <button class="bg-gray-700 hover:bg-gray-600 text-xs text-gray-200 py-2 rounded-md transition-colors shadow-sm font-medium">Hist. Equal</button>
-                            <button class="bg-gray-700 hover:bg-gray-600 text-xs text-gray-200 py-2 rounded-md transition-colors shadow-sm font-medium">Sharpen</button>
+                            <button data-action="hist-eq" class="bg-gray-700 hover:bg-gray-600 text-xs text-gray-200 py-2 rounded-md transition-colors shadow-sm font-medium">Hist. Equal</button>
+                            <button data-action="sharpen" class="bg-gray-700 hover:bg-gray-600 text-xs text-gray-200 py-2 rounded-md transition-colors shadow-sm font-medium">Sharpen</button>
                         </div>
                     </div>
                 </div>
 
+                <!-- Geometric Transform -->
                 <div class="border border-gray-700 rounded-lg bg-[#252525] overflow-hidden">
                     <button class="accordion-btn w-full flex justify-between items-center px-4 py-3 hover:bg-gray-700/50 transition-colors text-sm font-medium text-gray-400 hover:text-gray-200">
                         <span>Geometric Transform</span>
                         <span class="accordion-icon text-gray-500 text-xs">▶</span>
                     </button>
-                    <div class="accordion-content hidden p-4 flex flex-col gap-3 border-t border-gray-700/50">
-                        <button class="bg-gray-700 hover:bg-gray-600 text-xs text-gray-200 py-2 rounded-md transition-colors w-full">Rotate 90°</button>
-                        <button class="bg-gray-700 hover:bg-gray-600 text-xs text-gray-200 py-2 rounded-md transition-colors w-full">Flip Horizontal</button>
+                    <div class="accordion-content hidden p-4 flex flex-col gap-4 border-t border-gray-700/50">
+                        <div>
+                            <div class="flex justify-between text-xs text-gray-400 mb-2 font-medium">
+                                <span>Rotation (Degrees)</span>
+                                <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]" id="val-rotate">0</span>
+                            </div>
+                            <div class="flex gap-2 items-center">
+                                <input type="range" id="slider-rotate" min="0" max="360" value="0" class="flex-1 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                                <button id="btn-apply-rotate" class="bg-p-blue hover:bg-blue-500 text-white text-[10px] px-2 py-1 rounded">Apply</button>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button data-action="flip-h" class="bg-gray-700 hover:bg-gray-600 text-xs text-gray-200 py-1.5 rounded transition-colors w-full">Flip H</button>
+                            <button data-action="flip-v" class="bg-gray-700 hover:bg-gray-600 text-xs text-gray-200 py-1.5 rounded transition-colors w-full">Flip V</button>
+                        </div>
+                        <hr class="border-gray-600/50">
+                        <div>
+                            <label class="text-xs text-gray-400 mb-2 font-medium block">Crop (X, Y, W, H)</label>
+                            <div class="grid grid-cols-4 gap-1 mb-2">
+                                <input type="number" id="crop-x" placeholder="X" class="bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
+                                <input type="number" id="crop-y" placeholder="Y" class="bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
+                                <input type="number" id="crop-w" placeholder="W" class="bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
+                                <input type="number" id="crop-h" placeholder="H" class="bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
+                            </div>
+                            <button id="btn-apply-crop" class="bg-p-blue hover:bg-blue-500 text-white text-[10px] px-2 py-1.5 rounded w-full uppercase tracking-wider font-semibold">Apply Crop</button>
+                        </div>
+                        <hr class="border-gray-600/50">
+                        <div>
+                            <label class="text-xs text-gray-400 mb-2 font-medium block">Resize (W, H)</label>
+                            <div class="flex gap-1 mb-2">
+                                <input type="number" id="resize-w" placeholder="Width" class="flex-1 bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
+                                <input type="number" id="resize-h" placeholder="Height" class="flex-1 bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
+                            </div>
+                            <button id="btn-apply-resize" class="bg-p-blue hover:bg-blue-500 text-white text-[10px] px-2 py-1.5 rounded w-full uppercase tracking-wider font-semibold">Apply Resize</button>
+                        </div>
+                        <hr class="border-gray-600/50">
+                        <div>
+                            <label class="text-xs text-gray-400 mb-2 font-medium block">Translate (X, Y)</label>
+                            <div class="flex gap-1 mb-2">
+                                <input type="number" id="trans-x" placeholder="X" class="flex-1 bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
+                                <input type="number" id="trans-y" placeholder="Y" class="flex-1 bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
+                            </div>
+                            <button id="btn-apply-translate" class="bg-p-blue hover:bg-blue-500 text-white text-[10px] px-2 py-1.5 rounded w-full uppercase tracking-wider font-semibold">Apply Translate</button>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Image Restoration -->
+                <div class="border border-gray-700 rounded-lg bg-[#252525] overflow-hidden">
+                    <button class="accordion-btn w-full flex justify-between items-center px-4 py-3 hover:bg-gray-700/50 transition-colors text-sm font-medium text-gray-400 hover:text-gray-200">
+                        <span>Image Restoration</span>
+                        <span class="accordion-icon text-gray-500 text-xs">▶</span>
+                    </button>
+                    <div class="accordion-content hidden p-4 flex flex-col gap-4 border-t border-gray-700/50">
+                        <div>
+                            <div class="flex justify-between text-xs text-gray-400 mb-2 font-medium">
+                                <span>Gaussian Blur (Kernel)</span>
+                                <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]" id="val-gauss">1</span>
+                            </div>
+                            <div class="flex gap-2 items-center">
+                                <input type="range" id="slider-gauss" min="1" max="31" step="2" value="1" class="flex-1 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                                <button id="btn-apply-gauss" class="bg-p-blue hover:bg-blue-500 text-white text-[10px] px-2 py-1 rounded">Apply</button>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs text-gray-400 mb-2 font-medium">
+                                <span>Median Filter (Kernel)</span>
+                                <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]" id="val-median">1</span>
+                            </div>
+                            <div class="flex gap-2 items-center">
+                                <input type="range" id="slider-median" min="1" max="31" step="2" value="1" class="flex-1 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                                <button id="btn-apply-median" class="bg-p-blue hover:bg-blue-500 text-white text-[10px] px-2 py-1 rounded">Apply</button>
+                            </div>
+                        </div>
+                        <hr class="border-gray-600/50">
+                        <button id="btn-apply-denoise" class="bg-p-blue hover:bg-blue-500 text-white text-xs px-3 py-1.5 rounded transition-colors shadow-sm w-full font-medium">Denoise (Salt & Pepper)</button>
+                    </div>
+                </div>
+
+                <!-- Binary & Edge -->
                 <div class="border border-gray-700 rounded-lg bg-[#252525] overflow-hidden">
                     <button class="accordion-btn w-full flex justify-between items-center px-4 py-3 hover:bg-gray-700/50 transition-colors text-sm font-medium text-gray-400 hover:text-gray-200">
                         <span>Binary & Edge</span>
                         <span class="accordion-icon text-gray-500 text-xs">▶</span>
                     </button>
                     <div class="accordion-content hidden p-4 flex flex-col gap-4 border-t border-gray-700/50">
-                        
                         <div>
                             <div class="flex justify-between text-xs text-gray-400 mb-2 font-medium">
                                 <span>Thresholding (Binary)</span>
-                                <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]">127</span>
+                                <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]" id="val-thresh">127</span>
                             </div>
-                            <input type="range" min="0" max="255" value="127" class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                            <input type="range" id="slider-thresh" min="0" max="255" value="127" class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                            <button id="btn-apply-thresh" class="bg-p-blue hover:bg-blue-500 text-white text-xs px-3 py-1.5 rounded transition-colors shadow-sm mt-2 w-full font-medium">Apply Threshold</button>
                         </div>
-
                         <hr class="border-gray-600/50">
-
                         <div>
                             <label class="text-xs text-gray-400 mb-2 font-medium block">Edge Detection</label>
                             <div class="flex gap-2">
-                                <select class="flex-1 bg-gray-700 text-xs text-gray-200 py-1.5 px-2 rounded border border-gray-600 outline-none focus:border-p-blue">
+                                <select id="edge-method" class="flex-1 bg-gray-700 text-xs text-gray-200 py-1.5 px-2 rounded border border-gray-600 outline-none focus:border-p-blue">
                                     <option value="canny">Canny</option>
                                     <option value="sobel">Sobel</option>
                                     <option value="prewitt">Prewitt</option>
@@ -200,73 +246,108 @@
                                     <option value="laplacian">Laplacian</option>
                                     <option value="log">Laplacian of Gaussian</option>
                                 </select>
-                                <button class="bg-p-blue hover:bg-blue-500 text-white text-xs px-3 rounded transition-colors shadow-sm">Apply</button>
+                                <button id="btn-apply-edge" class="bg-p-blue hover:bg-blue-500 text-white text-xs px-3 rounded transition-colors shadow-sm">Apply</button>
                             </div>
                         </div>
-
                         <div>
                             <label class="text-xs text-gray-400 mb-2 font-medium block">Morphology</label>
                             <div class="flex gap-2">
-                                <select class="flex-1 bg-gray-700 text-xs text-gray-200 py-1.5 px-2 rounded border border-gray-600 outline-none focus:border-p-blue">
+                                <select id="morph-method" class="flex-1 bg-gray-700 text-xs text-gray-200 py-1.5 px-2 rounded border border-gray-600 outline-none focus:border-p-blue">
                                     <option value="erosion">Erosion</option>
                                     <option value="dilation">Dilation</option>
                                 </select>
-                                <button class="bg-p-blue hover:bg-blue-500 text-white text-xs px-3 rounded transition-colors shadow-sm">Apply</button>
+                                <button id="btn-apply-morph" class="bg-p-blue hover:bg-blue-500 text-white text-xs px-3 rounded transition-colors shadow-sm">Apply</button>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
+                <!-- Color Processing -->
                 <div class="border border-gray-700 rounded-lg bg-[#252525] overflow-hidden">
                     <button class="accordion-btn w-full flex justify-between items-center px-4 py-3 hover:bg-gray-700/50 transition-colors text-sm font-medium text-gray-400 hover:text-gray-200">
                         <span>Color Processing</span>
                         <span class="accordion-icon text-gray-500 text-xs">▶</span>
                     </button>
                     <div class="accordion-content hidden p-4 flex flex-col gap-4 border-t border-gray-700/50">
-                        
-                        <button class="bg-gray-700 hover:bg-gray-600 text-xs text-gray-200 py-2 rounded-md transition-colors w-full font-medium shadow-sm">
+                        <button data-action="grayscale" class="bg-gray-700 hover:bg-gray-600 text-xs text-gray-200 py-2 rounded-md transition-colors w-full font-medium shadow-sm">
                             Convert to Grayscale
                         </button>
-
                         <hr class="border-gray-600/50">
-
                         <div>
                             <label class="text-xs text-gray-400 mb-2 font-medium block">Split RGB Channel</label>
                             <div class="grid grid-cols-3 gap-2">
-                                <button class="bg-red-900/30 hover:bg-red-800/50 text-red-300 text-xs py-1.5 rounded border border-red-800/50 transition-colors">Red</button>
-                                <button class="bg-green-900/30 hover:bg-green-800/50 text-green-300 text-xs py-1.5 rounded border border-green-800/50 transition-colors">Green</button>
-                                <button class="bg-blue-900/30 hover:bg-blue-800/50 text-blue-300 text-xs py-1.5 rounded border border-blue-800/50 transition-colors">Blue</button>
+                                <button data-action="channel-r" class="bg-red-900/30 hover:bg-red-800/50 text-red-300 text-xs py-1.5 rounded border border-red-800/50 transition-colors">Red</button>
+                                <button data-action="channel-g" class="bg-green-900/30 hover:bg-green-800/50 text-green-300 text-xs py-1.5 rounded border border-green-800/50 transition-colors">Green</button>
+                                <button data-action="channel-b" class="bg-blue-900/30 hover:bg-blue-800/50 text-blue-300 text-xs py-1.5 rounded border border-blue-800/50 transition-colors">Blue</button>
                             </div>
                         </div>
-
                         <hr class="border-gray-600/50">
-
                         <div class="flex flex-col gap-3">
                             <div>
                                 <div class="flex justify-between text-xs text-gray-400 mb-2 font-medium">
                                     <span>Hue</span>
-                                    <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]">0</span>
+                                    <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]" id="val-hue">0</span>
                                 </div>
-                                <input type="range" min="-180" max="180" value="0" class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                                <input type="range" id="slider-hue" min="-180" max="180" value="0" class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
                             </div>
                             <div>
                                 <div class="flex justify-between text-xs text-gray-400 mb-2 font-medium">
                                     <span>Saturation</span>
-                                    <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]">100</span>
+                                    <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]" id="val-sat">100</span>
                                 </div>
-                                <input type="range" min="0" max="200" value="100" class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                                <input type="range" id="slider-sat" min="0" max="200" value="100" class="w-full h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
                             </div>
+                            <button id="btn-apply-hsv" class="bg-p-blue hover:bg-blue-500 text-white text-xs px-3 py-1.5 rounded transition-colors shadow-sm w-full font-medium">Apply Color Adjustment</button>
                         </div>
-
                     </div>
                 </div>
 
-                <div class="mt-4">
-                    <button class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-sm font-semibold py-3 rounded-lg shadow-lg shadow-blue-900/30 transition-all active:scale-95 flex justify-center items-center gap-2">
-                        <span>🔍</span> Detect Object (CNN)
+                <!-- Image Segmentation -->
+                <div class="border border-gray-700 rounded-lg bg-[#252525] overflow-hidden">
+                    <button class="accordion-btn w-full flex justify-between items-center px-4 py-3 hover:bg-gray-700/50 transition-colors text-sm font-medium text-gray-400 hover:text-gray-200">
+                        <span>Image Segmentation</span>
+                        <span class="accordion-icon text-gray-500 text-xs">▶</span>
                     </button>
+                    <div class="accordion-content hidden p-4 flex flex-col gap-4 border-t border-gray-700/50">
+                        <div>
+                            <label class="text-xs text-gray-400 mb-2 font-medium block">Method</label>
+                            <div class="flex gap-2">
+                                <select id="seg-method" class="flex-1 bg-gray-700 text-xs text-gray-200 py-1.5 px-2 rounded border border-gray-600 outline-none focus:border-p-blue">
+                                    <option value="threshold">Threshold-based</option>
+                                    <option value="edge">Edge-based</option>
+                                    <option value="region">Region-based</option>
+                                </select>
+                                <button id="btn-apply-seg" class="bg-p-blue hover:bg-blue-500 text-white text-xs px-3 rounded transition-colors shadow-sm">Apply</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Image Compression -->
+                <div class="border border-gray-700 rounded-lg bg-[#252525] overflow-hidden">
+                    <button class="accordion-btn w-full flex justify-between items-center px-4 py-3 hover:bg-gray-700/50 transition-colors text-sm font-medium text-gray-400 hover:text-gray-200">
+                        <span>Image Compression</span>
+                        <span class="accordion-icon text-gray-500 text-xs">▶</span>
+                    </button>
+                    <div class="accordion-content hidden p-4 flex flex-col gap-4 border-t border-gray-700/50">
+                        <div>
+                            <div class="flex justify-between text-xs text-gray-400 mb-2 font-medium">
+                                <span>Quality (JPEG)</span>
+                                <span class="text-white bg-gray-700 px-1.5 py-0.5 rounded text-[10px]" id="val-compress">50</span>
+                            </div>
+                            <div class="flex gap-2 items-center">
+                                <input type="range" id="slider-compress" min="1" max="100" value="50" class="flex-1 h-1 bg-gray-600 rounded-lg appearance-none cursor-pointer accent-blue-500">
+                                <button id="btn-apply-compress" class="bg-p-blue hover:bg-blue-500 text-white text-[10px] px-2 py-1 rounded">Apply</button>
+                            </div>
+                        </div>
+                        <div id="compress-info" class="text-xs text-gray-400 mt-2 bg-gray-800 p-2 rounded hidden">
+                            Original: <span id="comp-orig" class="text-white font-medium"></span> KB<br>
+                            Compressed: <span id="comp-new" class="text-white font-medium"></span> KB
+                        </div>
+                    </div>
+                </div>
+
+
 
             </div>
         </div>
