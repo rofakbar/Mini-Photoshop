@@ -144,6 +144,7 @@
                         <span class="accordion-icon text-gray-500 text-xs">▶</span>
                     </button>
                     <div class="accordion-content hidden p-4 flex flex-col gap-4 border-t border-gray-700/50">
+                        
                         <div>
                             <div class="flex justify-between text-xs text-gray-400 mb-2 font-medium">
                                 <span>Rotation (Degrees)</span>
@@ -154,36 +155,43 @@
                                 <button id="btn-apply-rotate" class="bg-p-blue hover:bg-blue-500 text-white text-[10px] px-2 py-1 rounded">Apply</button>
                             </div>
                         </div>
+                        
                         <div class="grid grid-cols-2 gap-2">
                             <button data-action="flip-h" class="bg-gray-700 hover:bg-gray-600 text-xs text-gray-200 py-1.5 rounded transition-colors w-full">Flip H</button>
                             <button data-action="flip-v" class="bg-gray-700 hover:bg-gray-600 text-xs text-gray-200 py-1.5 rounded transition-colors w-full">Flip V</button>
                         </div>
+                        
                         <hr class="border-gray-600/50">
+                        
                         <div>
                             <label class="text-xs text-gray-400 mb-2 font-medium block">Crop (X, Y, W, H)</label>
                             <div class="grid grid-cols-4 gap-1 mb-2">
-                                <input type="number" id="crop-x" placeholder="X" class="bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
-                                <input type="number" id="crop-y" placeholder="Y" class="bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
-                                <input type="number" id="crop-w" placeholder="W" class="bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
-                                <input type="number" id="crop-h" placeholder="H" class="bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
+                                <input type="number" id="crop-x" placeholder="X" class="w-full min-w-0 bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
+                                <input type="number" id="crop-y" placeholder="Y" class="w-full min-w-0 bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
+                                <input type="number" id="crop-w" placeholder="W" class="w-full min-w-0 bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
+                                <input type="number" id="crop-h" placeholder="H" class="w-full min-w-0 bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
                             </div>
                             <button id="btn-apply-crop" class="bg-p-blue hover:bg-blue-500 text-white text-[10px] px-2 py-1.5 rounded w-full uppercase tracking-wider font-semibold">Apply Crop</button>
                         </div>
+                        
                         <hr class="border-gray-600/50">
+                        
                         <div>
                             <label class="text-xs text-gray-400 mb-2 font-medium block">Resize (W, H)</label>
-                            <div class="flex gap-1 mb-2">
-                                <input type="number" id="resize-w" placeholder="Width" class="flex-1 bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
-                                <input type="number" id="resize-h" placeholder="Height" class="flex-1 bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
+                            <div class="grid grid-cols-2 gap-2 mb-2">
+                                <input type="number" id="resize-w" placeholder="Width" class="w-full min-w-0 bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
+                                <input type="number" id="resize-h" placeholder="Height" class="w-full min-w-0 bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
                             </div>
                             <button id="btn-apply-resize" class="bg-p-blue hover:bg-blue-500 text-white text-[10px] px-2 py-1.5 rounded w-full uppercase tracking-wider font-semibold">Apply Resize</button>
                         </div>
+                        
                         <hr class="border-gray-600/50">
+                        
                         <div>
                             <label class="text-xs text-gray-400 mb-2 font-medium block">Translate (X, Y)</label>
-                            <div class="flex gap-1 mb-2">
-                                <input type="number" id="trans-x" placeholder="X" class="flex-1 bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
-                                <input type="number" id="trans-y" placeholder="Y" class="flex-1 bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
+                            <div class="grid grid-cols-2 gap-2 mb-2">
+                                <input type="number" id="trans-x" placeholder="X" class="w-full min-w-0 bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
+                                <input type="number" id="trans-y" placeholder="Y" class="w-full min-w-0 bg-gray-700 text-xs text-white p-1 rounded text-center focus:outline-none focus:ring-1 focus:ring-p-blue">
                             </div>
                             <button id="btn-apply-translate" class="bg-p-blue hover:bg-blue-500 text-white text-[10px] px-2 py-1.5 rounded w-full uppercase tracking-wider font-semibold">Apply Translate</button>
                         </div>
